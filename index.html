@@ -111,16 +111,6 @@
     </style>
 </head>
 <body>
-    <h1>demo videos For Free</h1>
-
-    <!-- CAPTCHA Section -->
-    <div id="captcha-container" class="captcha-container">
-        <div class="captcha-explanation">Please solve the CAPTCHA below to verify you're not a robot:</div>
-        <label class="captcha-label" for="captcha">What is 2 + 2 =</label>
-        <input type="text" id="captcha" class="captcha-input" placeholder="Enter answer & click Verify">
-        <button id="submitCaptcha">Verify</button>
-        <div id="captchaError" class="captcha-error"></div>
-    </div>
 
     <!-- Media files will be displayed here after solving the CAPTCHA -->
     <div id="file-list" style="display: none;"></div>
@@ -162,72 +152,67 @@
             { name: 'applepie33', type: 'php', realType: 'jpg' }
         ];
 
-        const fileList = document.getElementById('file-list');
-        const captchaInput = document.getElementById('captcha');
-        const captchaError = document.getElementById('captchaError');
-        const submitCaptcha = document.getElementById('submitCaptcha');
+        document.addEventListener('DOMContentLoaded', function() {
+    const fileList = document.getElementById('file-list');
+    fileList.style.display = 'block';
 
-        submitCaptcha.addEventListener('click', function() {
-    if (captchaInput.value === '4') {
-        document.getElementById('captcha-container').style.display = 'none';
-        fileList.style.display = 'block';
+    // إضافة الرسالة الجديدة بدلاً من رسالة التأخير
+    const contactMessage = document.createElement('div');
+    contactMessage.classList.add('delay-message');
+    contactMessage.innerHTML = 'you can contact me here and you can ask for proof: <a href="https://bit.ly/tectok">https://bit.ly/tectok</a>';
+    fileList.appendChild(contactMessage);
 
-// إضافة الرسالة الجديدة بدلاً من رسالة التأخير
-const contactMessage = document.createElement('div');
-contactMessage.classList.add('delay-message'); // نفس الفئة المستخدمة لتنسيق النص
-contactMessage.innerHTML = 'you can contact me here and you can ask for proof: <a href="https://bit.ly/tectok">https://bit.ly/tectok</a>';
-fileList.appendChild(contactMessage);
+    files.forEach((file, index) => {
+        const container = document.createElement('div');
+        container.classList.add('file-container');
+        let filePath = `${file.name}.${file.type}`;
 
-        files.forEach((file, index) => {
-            const container = document.createElement('div');
-            container.classList.add('file-container');
-            let filePath = `${file.name}.${file.type}`;
+        if (file.realType === 'jpg') {
+            const img = document.createElement('img');
+            img.src = filePath;
+            img.width = 600;
+            img.loading = 'lazy';
+            container.appendChild(img);
+        } else if (file.realType === 'mp4') {
+            const video = document.createElement('video');
+            video.width = 600;
+            video.controls = true;
+            video.preload = 'metadata';
 
-            // ... باقي الكود كما هو
+            const source = document.createElement('source');
+            source.src = filePath;
+            source.type = 'video/mp4';
+            video.appendChild(source);
 
-                    if (file.realType === 'jpg') {
-                        const img = document.createElement('img');
-                        img.src = filePath;
-                        img.width = 600;
-                        container.appendChild(img);
-                    } else if (file.realType === 'mp4') {
-                        const video = document.createElement('video');
-                        video.width = 600;
-                        video.controls = true;
-                        video.preload = 'auto'; // تحميل الفيديو بشكل جزئي
+            container.appendChild(video);
+        }
 
-                        const source = document.createElement('source');
-                        source.src = filePath;
-                        source.type = 'video/mp4';
-                        video.appendChild(source);
+        if (file.name === 'applepie17') {
+            const smallContact = document.createElement('div');
+            smallContact.classList.add('contact-small');
+            smallContact.innerHTML = '  contact me: <a href="https://bit.ly/tectok">https://bit.ly/tectok</a>';
+            fileList.appendChild(smallContact);
+        }
 
-                        container.appendChild(video);
-                    }
+        if (file.name === 'applepie30') {
+            const customerMessage = document.createElement('div');
+            customerMessage.classList.add('customer-message');
+            customerMessage.textContent = 'One of my customers:';
+            fileList.appendChild(customerMessage);
+        }
 
-                    if (file.name === 'applepie17') {
-                        const smallContact = document.createElement('div');
-                        smallContact.classList.add('contact-small');
-                        smallContact.innerHTML = '  contact me: <a href="https://bit.ly/tectok">https://bit.ly/tectok</a>';
-                        fileList.appendChild(smallContact);
-                    }
+        fileList.appendChild(container);
+    });
 
-                    if (file.name === 'applepie30') {
-                        const customerMessage = document.createElement('div');
-                        customerMessage.classList.add('customer-message');
-                        customerMessage.textContent = 'One of my customers:';
-                        fileList.appendChild(customerMessage);
-                    }
+    const largeContact = document.createElement('div');
+    largeContact.classList.add('contact-large');
+    largeContact.innerHTML = 'contact me: <a href="https://bit.ly/tectok">https://bit.ly/tectok</a>';
+    fileList.appendChild(largeContact);
+});
 
-                    fileList.appendChild(container);
-                });
-
-                const largeContact = document.createElement('div');
-                largeContact.classList.add('contact-large');
-                largeContact.innerHTML = 'contact me: <a href="https://bit.ly/tectok">https://bit.ly/tectok</a>';
-                fileList.appendChild(largeContact);
-            } else {
-                captchaError.textContent = 'Incorrect CAPTCHA. Please try again.';
-            }
+    </script>
+</body>
+</html>
         });
     </script>
 </body>
